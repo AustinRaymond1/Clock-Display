@@ -16,6 +16,7 @@ public class ClockDisplay
 {
     private NumberDisplay hours;
     private NumberDisplay minutes;
+    private String apms;
     private String displayString;    // simulates the actual display
     
     /**
@@ -26,6 +27,7 @@ public class ClockDisplay
     {
         hours = new NumberDisplay(24);
         minutes = new NumberDisplay(60);
+        apms = " ";
         updateDisplay();
     }
 
@@ -34,13 +36,13 @@ public class ClockDisplay
      * creates a new clock set at the time specified by the 
      * parameters.
      */
-    public ClockDisplay(int hour, int minute)
+    public ClockDisplay(int hour, int minute, String apm)
     {
-        hours = new NumberDisplay(24);
+        hours = new NumberDisplay(12);
         minutes = new NumberDisplay(60);
-        setTime(hour, minute);
-    }
-
+        apms = apm;
+        setTime(hour, minute, apm);
+    } 
     /**
      * This method should get called once every minute - it makes
      * the clock display go one minute forward.
@@ -58,13 +60,14 @@ public class ClockDisplay
      * Set the time of the display to the specified hour and
      * minute.
      */
-    public void setTime(int hour, int minute)
+    public void setTime(int hour, int minute, String apm)
     {
         hours.setValue(hour);
         minutes.setValue(minute);
+        apm = apms;
         updateDisplay();
     }
-
+    
     /**
      * Return the current time of this display in the format HH:MM.
      */
@@ -79,6 +82,6 @@ public class ClockDisplay
     private void updateDisplay()
     {
         displayString = hours.getDisplayValue() + ":" + 
-                        minutes.getDisplayValue();
+                        minutes.getDisplayValue() + apms;
     }
 }
