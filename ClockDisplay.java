@@ -15,7 +15,9 @@
 public class ClockDisplay
 {
     private NumberDisplay hours;
+    private int hours_1;
     private NumberDisplay minutes;
+    private String apm;
     private String displayString;    // simulates the actual display
     
     /**
@@ -38,7 +40,16 @@ public class ClockDisplay
     {
         hours = new NumberDisplay(24);
         minutes = new NumberDisplay(60);
-        setTime(hour, minute);
+        if (hour > 12 && hour < 24)
+        {
+            hours_1 = hour - 12;
+            apm = "pm";
+        }
+        else
+        {
+            apm="am";
+        }    
+        setTime(hours_1, minute);
     }
 
     /**
@@ -72,13 +83,13 @@ public class ClockDisplay
     {
         return displayString;
     }
-    
+       
     /**
      * Update the internal string that represents the display.
      */
     private void updateDisplay()
     {
         displayString = hours.getDisplayValue() + ":" + 
-                        minutes.getDisplayValue();
+                        minutes.getDisplayValue() + apm;
     }
 }
